@@ -1,4 +1,4 @@
-from db_connection import get_connection
+from database.db_connection import get_connection
 
 def create_user(name,email,password_hash,role,created_at):
     conn = get_connection()
