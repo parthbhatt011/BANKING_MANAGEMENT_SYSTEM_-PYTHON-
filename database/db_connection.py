@@ -28,6 +28,7 @@ def initialize_db():
     # Accounts table
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS accounts (
+        email TEXT UNIQUE NOT NULL,
         account_id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,
         balance REAL DEFAULT 0,

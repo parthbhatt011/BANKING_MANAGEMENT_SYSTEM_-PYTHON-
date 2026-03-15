@@ -18,15 +18,22 @@ def get_user_by_email(email):
 def show_account(email):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    cursor.execute("SELECT * FROM accounts WHERE email = ?", (email,))
     user = cursor.fetchone()
     conn.close()
-    return user
+    if user:
+        print("Account Details:")
+        print("user id: "), user["user_id"]
+        print("Email:", user["email"])
+        print("Account No:", user["account_id"])
+        print("Created at:", user["created_at"])
+    else:
+        print("User not found")
 
-def create_account(user_id,account,created_at):
+def create_account(email,user_id,account,created_at):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO accounts(user_id,account_id,created_at) VALUES(?,?,?)",(user_id,account,created_at))
+    cursor.execute("INSERT INTO accounts(email,user_id,account_id,created_at) VALUES(?,?,?,?)",(email,user_id,account,created_at))
     conn.commit()
     conn.close()
 
