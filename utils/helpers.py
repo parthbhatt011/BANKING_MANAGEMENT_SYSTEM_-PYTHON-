@@ -21,12 +21,13 @@ def otp_generater():
     otp = totp.now()
     return otp, totp
 
-def otp_sender(otp, email):
+def otp_sender(email,otp):
     sender = "your_email@gmail.com"
     password = "app_password"
     message = f"""Subject: OTP Verification For Banking Management System
-Your OTP is: {otp}
-It will expire in 5 minutes.
+
+    Your OTP is: {otp}
+    It will expire in 5 minutes.
 """
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()

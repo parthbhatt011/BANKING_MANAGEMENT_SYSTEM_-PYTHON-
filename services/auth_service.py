@@ -1,9 +1,9 @@
 from database.queries import create_user, get_user_by_email, create_account
 from utils.security import hash_password, verify_password
 from utils.helpers import (
-    generate_otp,
-    send_otp,
-    verify_otp,
+    otp_generater,
+    otp_sender,
+    otp_verifier,
     get_current_timestamp,
     generate_account_number,
     generate_userid
@@ -16,10 +16,10 @@ def register_user(name, email, password, role="customer"):
     existing_user = get_user_by_email(email)
     if existing_user:
         raise ValueError("Email already registered")
-    otp, totp = generate_otp()
-    send_otp(email, otp)
+    otp, totp = otp_generater()
+    otp_sender(email, otp)
     for _ in range(3):
-        if verify_otp(totp):
+        if otp_verifier(totp):
             break
     else:
         raise ValueError("OTP verification failed")
@@ -32,11 +32,17 @@ def register_user(name, email, password, role="customer"):
     return "User registered successfully"
 
 
-
 def login_user(email, password):
     user = get_user_by_email(email)
     if not user:
         raise ValueError("User not found")
     if not verify_password(password, user["password_hash"]):
         raise ValueError("Invalid password")
+    otp, totp = otp_generater()
+    otp_sender(email, otp)
+    for _ in range(3):
+        if otp_verifier(totp):
+            break
+    else:
+        raise ValueError("OTP verification failed")
     return user
