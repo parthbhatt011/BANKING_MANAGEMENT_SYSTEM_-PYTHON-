@@ -1,8 +1,12 @@
 from rich.console import Console
 from rich.panel import Panel
+
+import database.queries
 from services.auth_service import login_user, register_user
 from ui.dashboard import dashboard
 from database.db_connection import get_connection
+import pwinput
+from database.queries import show_account
 
 console = Console()
 
@@ -23,7 +27,7 @@ def login_screen():
         if choice == "1":
 
             email = input("Email: ")
-            password = input("Password: ")
+            password = input("Password:")
 
             try:
                 user = login_user(email, password)
@@ -38,11 +42,13 @@ def login_screen():
 
             name = input("Name: ")
             email = input("Email: ")
-            password = input("Password: ")
+            password = input("Password:")
 
             try:
                 register_user(name, email, password)
                 console.print("[green]User registered successfully[/green]")
+                console.print("The Account details are:")
+                console.print(show_account(email))
                 input("Press Enter to continue")
 
             except Exception as e:

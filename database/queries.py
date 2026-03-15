@@ -3,7 +3,7 @@ from database.db_connection import get_connection
 def create_user(name,email,password_hash,role,created_at):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO users(name,email,password_hash,role) VALUES(?,?,?,?)",(name, email, password_hash, role, created_at))
+    cursor.execute("INSERT INTO users(name,email,password_hash,role,created_at) VALUES(?,?,?,?,?)",(name, email, password_hash, role, created_at))
     conn.commit()
     conn.close()
 
@@ -15,10 +15,18 @@ def get_user_by_email(email):
     conn.close()
     return user
 
-def create_account(user_id,account_type,created_at):
+def show_account(email):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO accounts(user_id,account_type,created_at) VALUES(?,?,?)",(user_id,account_type,created_at))
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+    conn.close()
+    return user
+
+def create_account(user_id,account,created_at):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO accounts(user_id,account_id,created_at) VALUES(?,?,?)",(user_id,account,created_at))
     conn.commit()
     conn.close()
 

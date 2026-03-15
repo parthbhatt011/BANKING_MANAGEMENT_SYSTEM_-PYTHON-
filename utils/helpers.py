@@ -1,6 +1,9 @@
 import random
 from datetime import datetime
 
+def generate_userid():
+    return random.randint(10000000, 99999999)
+
 def generate_account_number():
     return random.randint(10000000, 99999999)
 
