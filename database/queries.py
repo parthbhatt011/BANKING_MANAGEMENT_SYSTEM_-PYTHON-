@@ -58,3 +58,14 @@ def create_transaction(account_id, type, amount, timestamp, description):
     cursor.execute("INSERT INTO transactions (account_id, type, amount, timestamp, description) VALUES (?, ?, ?, ?, ?)",(account_id, type, amount, timestamp, description))
     conn.commit()
     conn.close()
+
+def show_balance(account_id):
+    conn= get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM accounts WHERE account_id = ?", (account_id,))
+    user = cursor.fetchone()
+    conn.close()
+    if user:
+       return user["balance"]
+    else:
+        print("User not found")

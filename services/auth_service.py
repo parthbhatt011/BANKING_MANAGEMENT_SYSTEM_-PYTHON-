@@ -32,6 +32,7 @@ def register_user(name, email, password, role="customer"):
     return "User registered successfully"
 
 
+
 def login_user(email, password):
     user = get_user_by_email(email)
     if not user:
