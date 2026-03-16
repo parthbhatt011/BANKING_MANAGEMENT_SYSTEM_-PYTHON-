@@ -18,6 +18,7 @@ def login_screen():
         console.clear()
         console.print(Panel("         BANKING MANAGEMENT SYSTEM      ", style="bold blue"))
         console.print("welcome to Banking Management System", style="bold blue")
+        consile.print("Please select an option", style="bold blue")
         console.print("1. Login")
         console.print("2. Register")
         console.print("3. Exit")
