@@ -7,6 +7,7 @@ def dashboard(user):
     while True:
         console.clear()
         console.print(Panel(f"Welcome {user['name']}", style="bold green"))
+        console.print("Please select an option", style="bold green")
         console.print("1. Deposit Money")
         console.print("2. Withdraw Money")
         console.print("3. Show Balance")
