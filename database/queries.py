@@ -69,3 +69,11 @@ def show_balance(account_id):
        return user["balance"]
     else:
         print("User not found")
+
+def show_transactions(account_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM transactions WHERE account_id = ?", (account_id,))
+    account = cursor.fetchone()
+    conn.close()
+    return account

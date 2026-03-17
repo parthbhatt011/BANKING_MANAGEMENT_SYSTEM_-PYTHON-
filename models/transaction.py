@@ -14,3 +14,6 @@ class Transaction:
                 f"type={self.type}, "
                 f"amount={self.amount})"
             )
+
+def transaction_history():
+    pass
