@@ -15,5 +15,4 @@ class Transaction:
                 f"amount={self.amount})"
             )
 
-def transaction_history():
-    pass
+

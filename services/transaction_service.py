@@ -1,4 +1,4 @@
-from database.queries import update_balance, create_transaction, get_account
+from database.queries import update_balance, create_transaction, get_account,show_transactions
 from utils.helpers import get_current_timestamp
 
 def deposit_money(account_id, amount):
@@ -36,3 +36,5 @@ def withdraw_money(account_id, amount):
         "Withdrawal transaction"
     )
     return "Withdrawal successful"
+def transaction_history(accountno):
+    account=show_transactions(accountno)
